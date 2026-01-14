@@ -1,0 +1,8 @@
+{
+  "name": "Dr. Neemz Dentistry - Best Dental Clinic in Salem",
+  "description": "A high-converting, SEO-friendly dental clinic website featuring services like braces, implants, and root canal treatments with award-winning expertise.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ]
+}
