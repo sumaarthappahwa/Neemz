@@ -1,7 +1,6 @@
-
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import { GoogleGenAI } from "@google/genai";
-import { Upload, Camera, Search, AlertCircle, RefreshCcw, CheckCircle2, X } from 'lucide-react';
+import { Upload, Search, AlertCircle, RefreshCcw, CheckCircle2, X } from 'lucide-react';
 
 const AIAnalyzer: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -26,12 +25,18 @@ const AIAnalyzer: React.FC = () => {
   const analyzeSmile = async () => {
     if (!image) return;
 
+    const apiKey = process.env.API_KEY;
+    if (!apiKey) {
+      setError("API Key is missing. Please configure the environment variable in Vercel settings.");
+      return;
+    }
+
     setAnalyzing(true);
     setError(null);
     setResult(null);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey });
       const base64Data = image.split(',')[1];
       
       const response = await ai.models.generateContent({
